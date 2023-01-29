@@ -2,10 +2,16 @@
 const User = require("../models/userModel"); // importing the user model
 // for rendering the sign up page 
 module.exports.renderSignUp = function(req, res){
+    if(req.isAuthenticated()){
+        return res.redirect("/users/profile"); 
+    }
     return res.render("signUp"); 
 }
 // for rendering the sign in page 
 module.exports.renderSignIn = function(req, res){
+     if(req.isAuthenticated()){
+        return res.redirect("/users/profile"); 
+     }
     return res.render("signIn"); 
 }; 
  // for getting the data from signUp page 
@@ -34,6 +40,11 @@ module.exports.createUser = function(req, res){
 }
 // for getting the data from signIn page
 module.exports.createSession = function(req, res){
+     
+    return res.redirect("/users/profile"); 
 }
+ module.exports.profile = function(req, res){
+    return res.render("profile"); 
+ }
 
 
