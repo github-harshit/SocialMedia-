@@ -7,12 +7,22 @@ const express = require('express');
    const cookieParser = require("cookie-parser"); 
     const passport = require("passport"); 
     const passportLocal = require("./config/passportLocal"); 
+    const MongoStore = require("connect-mongo");
      const session = require("express-session");
      app.use(session({
         name:"socialMedia", 
         secret:"secret", 
         saveUninitialized: false, 
-        resave:  false
+        resave:  false, 
+        store : MongoStore.create(
+            {mongoUrl: "mongodb://localhost/Soical_Webiste_db"}, 
+            {
+            mongooseConnection: db,
+            autoRemove: 'disabled'
+        }, function(err){
+            console.log(err || "connect mongodb setup ok"); 
+        })
+
      })); 
      app.use(passport.initialize()); 
      app.use(passport.session());
