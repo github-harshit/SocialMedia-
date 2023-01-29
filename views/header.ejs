@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="/css/header.css">
+<ul class="list">
+    <% if(locals.user){ %>
+                <li class="item">
+                    <a href="/users/sign-out">Sign Out </a>
+                </li>
+
+     <%} else{ %>
+        <li class="item">
+            <a href="/users/sign-up"> Sign Up </a>
+         </li>
+
+        <li class="item">
+            <a href="/users/sign-in">Sign In </a>
+        </li>
+         
+
+     <%} %>
+
+  
+</ul>

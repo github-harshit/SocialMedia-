@@ -43,8 +43,18 @@ module.exports.createSession = function(req, res){
      
     return res.redirect("/users/profile"); 
 }
+// for rendering the profile page 
  module.exports.profile = function(req, res){
-    return res.render("profile"); 
+    return res.render("profile", 
+      
+    ); 
+ }
+ // for sign out 
+ module.exports.destroySession = function(req, res){
+    req.logout(function(err){
+        console.log("error in logout ")
+    }); 
+    return res.redirect("/"); 
  }
 
 
