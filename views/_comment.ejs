@@ -3,7 +3,7 @@
        <%=comment.content%>
          =>
         <%=comment.user.name%>
-       <%if(locals.user && locals.user.id==comment.user.id || locals.user && locals.user.id==x.user.id){%>
+       <%if(locals.user && locals.user.id==comment.user.id ){%>
            <small>
                <a href="/comments/destroy/<%=comment._id%>">Delete</a>
            </small>

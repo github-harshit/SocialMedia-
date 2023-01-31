@@ -4,6 +4,7 @@
    =>
  <small><%= x.user.name%></small>
  <% if(locals.user && locals.user.id==x.user.id){%>
+    <%=x.user%>
 
      <small>
       <a href="/post/destroy/<%=x._id%>">Delete</a>"  

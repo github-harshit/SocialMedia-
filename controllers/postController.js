@@ -1,6 +1,6 @@
 const Post  = require("../models/postModel"); 
  const Comment = require("../models/commentModel");
-const { equal } = require("assert");
+
 module.exports.create = function(req, res){
      Post.create({
         content : req.body.content, 

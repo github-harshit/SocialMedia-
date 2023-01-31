@@ -41,13 +41,22 @@ module.exports.createUser = function(req, res){
 // for getting the data from signIn page
 module.exports.createSession = function(req, res){
      
-    return res.redirect("/users/profile"); 
+    return res.redirect("/"); 
 }
-// for rendering the profile page 
+// for rendering the profile page  of different  users 
  module.exports.profile = function(req, res){
-    return res.render("profile", 
+    User.findById(req.params.id, function(err, user){
+         if(err){
+            console.log("error in displaying profile via link "); 
+            return; 
+         }
+        return res.render("profile", {
+            profile_user : user
+        }); 
+
+    })
       
-    ); 
+     
  }
  // for sign out 
  module.exports.destroySession = function(req, res){
@@ -57,4 +66,18 @@ module.exports.createSession = function(req, res){
     return res.redirect("/"); 
  }
 
+ // for updating the user profile 
+ module.exports.update= function(req, res){
+    if(req.user.id==req.params.id){
+        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+             if(err){
+                console.log("error in updating the profile"); 
+                return; 
+             }
+            return res.redirect('back'); 
+        })
+    }else{
+        return res.status(401).send("Unauthorized"); 
+    }
+ }
 

@@ -11,6 +11,7 @@ const express = require("express");
     'local', 
     {failureRedirect: '/users/sign-in'}
    ),  userController.createSession); 
-    router.get("/profile", passport.checkAuthentication,  userController.profile); 
+    router.get("/profile/:id", passport.checkAuthentication,  userController.profile); 
      router.get("/sign-out", userController.destroySession);
+      router.post("/update/:id", passport.checkAuthentication, userController.update ); 
  module.exports = router ; 

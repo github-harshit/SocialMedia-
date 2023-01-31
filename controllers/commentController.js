@@ -34,7 +34,7 @@ const Post = require("../models/postModel");
                 return res.redirect('back');
              })
         }else{
-            return
+            return res.redirect("back"); 
         }
     })
  }
