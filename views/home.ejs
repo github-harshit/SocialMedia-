@@ -8,6 +8,25 @@
 </head>
 <body>
     <h1> Home Page </h1> 
+    <section id="postContainer">
+        <h4>Posts</h4>
+        <%if(locals.user){%>
+            <form action="/post/create" method="post">
+            <textarea name="content" id="content" cols="30" rows="5"></textarea>
+            <input type="submit" placeholder="Submit">
+        </form>
+       <% } %>
+        
+    </section>
+    <div class="showPosts">
+        <ul>
+         <% for(x of posts){%>
+            <%-include("_post") %>
+            
+       <% } %>
+                </ul>
+    </div>
+   
     
 </body>
 </html>
