@@ -1,15 +1,27 @@
-.list{
-   
-}
-.item{
-  list-style: none;
-   padding: 5px;
+.headerContainer {
+  height: 50px;
+  width: 100%;
+  background-color: blue;
+  color: white; }
 
-}
- .item a {
-  text-decoration: none;
-   font-size: 20px;
- }
-  .item a:hover{
-    color: red;
-  }
+.list {
+  display: flex;
+  position: relative;
+  justify-content: space-between; }
+
+.item {
+  padding: 5px;
+  list-style: none;
+  font-size: 18px; }
+
+.signIn, .signOut {
+  position: absolute;
+  left: 90%; }
+
+.signUp {
+  position: absolute;
+  left: 85%; }
+
+.item a {
+  color: white;
+  text-decoration: none; }

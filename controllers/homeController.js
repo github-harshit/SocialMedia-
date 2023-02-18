@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const Post  = require('../models/postModel')
 const User = require('../models/userModel')
  const Comment = require('../models/commentModel'); 
-module.exports.home = function(req, res){
-     Post.find({})
+  module.exports.home = async function(req, res){
+    let posts = await  Post.find({}).sort("-createdAt")
    .populate('user')
     .populate({
         path: 'comments',
@@ -12,16 +12,17 @@ module.exports.home = function(req, res){
           
         }
     })
-     .exec(function(err, posts){
-        User.find({}, function(err, users){
+    
+     let users =   await  User.find({})
              return res.render("home", {
                 posts:posts, 
                 all_users: users
              })
-        })
-         
+      
+       }  
 
-     })
+  
+    
+
     
    
-}

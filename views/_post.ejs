@@ -1,39 +1,50 @@
-<li>
+<html>
+    <head>
+     
+    </head>
+     <body>
+        <li id="post-<%=post._id%>">
                
-    <%= x.content %>
-   =>
- <small><%= x.user.name%></small>
- <% if(locals.user && locals.user.id==x.user.id){%>
-    <%=x.user%>
-
-     <small>
-      <a href="/post/destroy/<%=x._id%>">Delete</a>"  
-    </small>
-<% }%>
- 
-
-
-
-       <div class="commentContainer">
-
-       <%if(locals.user){%>
-        <form action="/comments/create" method="post">
-             <input type="text" name="content" id="content" placeholder="Add your comment">
-            
-             <input type="hidden" name="post" id="post" value="<%= x._id %>">
-              <input type="submit" value="Add Comment">
-
-         </form>
-
-       <%}%>
-        </div>
-       <div class="showComments">
-        <ul id="comment-<%=x._id%>">
-            <%for(comment of x.comments){%>
-                <%-include("_comment")%>
-
-            <%}%>
-        </ul>
-       </div>
+            <%= post.content %>
+           =>
+         <small><%= post.user.name%></small>
+         <% if(locals.user && locals.user.id==post.user.id){%>
+           
+        
+             <small>
+              <a class="delete-post-button" href="/post/destroy/<%=post._id%>">Delete</a>"  
+            </small>
+        <% }%>
          
-    </li>
+        
+        
+        
+               <div class="commentContainer">
+        
+               <%if(locals.user){%>
+                <form action="/comments/create" id="newCommentsForm" method="post">
+                     <input type="text" name="content" id="content" placeholder="Add your comment">
+                    
+                     <input type="hidden" name="post" id="post" value="<%= post._id %>">
+                      <input type="submit" value="Add Comment">
+        
+                 </form>
+        
+               <%}%>
+                </div>
+               <div class="showComments">
+                <ul id="comment-<%=post._id%>">
+                    <%for(comment of post.comments){%>
+                        <%-include("_comment")%>
+        
+                    <%}%>
+                </ul>
+               </div>
+                 
+            </li>
+           
+        
+     </body>
+    
+
+</html>

@@ -1,4 +1,6 @@
 
+const path = require("path"); 
+ const fs = require("fs"); 
 const User = require("../models/userModel"); // importing the user model
 // for rendering the sign up page 
 module.exports.renderSignUp = function(req, res){
@@ -40,7 +42,7 @@ module.exports.createUser = function(req, res){
 }
 // for getting the data from signIn page
 module.exports.createSession = function(req, res){
-     
+     req.flash('success', "Logged In Sucessfuly")
     return res.redirect("/"); 
 }
 // for rendering the profile page  of different  users 
@@ -63,19 +65,42 @@ module.exports.createSession = function(req, res){
     req.logout(function(err){
         console.log("error in logout ")
     }); 
+    req.flash("success", "Logged Out Successfully"); 
     return res.redirect("/"); 
  }
 
  // for updating the user profile 
- module.exports.update= function(req, res){
+ module.exports.update= async function(req, res){
+   
     if(req.user.id==req.params.id){
-        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
-             if(err){
-                console.log("error in updating the profile"); 
-                return; 
-             }
-            return res.redirect('back'); 
-        })
+        try{
+            let user  = await User.findById(req.params.id); 
+            User.uploadedAvatar(req, res, function(err){
+               if(err){
+                   console.log("Multer Error"); 
+                   return; 
+               }
+                user.name =req.body.name; 
+                user.email= req.body.email; 
+                 if(req.file){
+                 if(user.avatar){
+                     fs.unlinkSync(path.join(__dirname, "..", user.avatar)); 
+
+                 }
+
+                    // saving the path of the uploaded file into the avtar field in the user 
+                     user.avatar = User.avatarPath + "/" + req.file.filename; 
+                 }
+                  user.save(); 
+                  return res.redirect("back"); 
+               
+            })
+   
+        }catch(error){
+           req.flash("error", err); 
+           return res.redirect("back"); 
+        }
+
     }else{
         return res.status(401).send("Unauthorized"); 
     }

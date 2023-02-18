@@ -14,4 +14,13 @@ const express = require("express");
     router.get("/profile/:id", passport.checkAuthentication,  userController.profile); 
      router.get("/sign-out", userController.destroySession);
       router.post("/update/:id", passport.checkAuthentication, userController.update ); 
+
+      // google authentication 
+      // two routes one for whne i click button and second for which google fetches the data and send it to me 
+
+      router.get("/auth/google", passport.authenticate('google', {scope:['profile','email' ]})); 
+      router.get("/auth/google/callback", passport.authenticate('google', {
+        failureRedirect :"/users/sign-in"
+      }), userController.createSession); 
+
  module.exports = router ; 

@@ -4,28 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="/css/home.css">
     <title>Document</title>
 </head>
 <body>
     <h1> Home Page </h1> 
-    <section id="postContainer">
-        <h4>Posts</h4>
-        <%if(locals.user){%>
-            <form action="/post/create" method="post">
-            <textarea name="content" id="content" cols="30" rows="5"></textarea>
-            <input type="submit" placeholder="Submit">
-        </form>
-       <% } %>
-        
-    </section>
-    <div class="showPosts">
-        <ul>
-         <% for(x of posts){%>
-            <%-include("_post") %>
-            
-       <% } %>
-                </ul>
-    </div>
+     <div class="container">
+
+        <section id="postContainer">
+            <h4>Posts</h4>
+            <%if(locals.user){%>
+                <form action="/post/create" id="newPostForm" method="post">
+                <textarea name="content" id="content" cols="30" rows="5"></textarea>
+                <input type="submit" placeholder="Submit">
+            </form>
+           <% } %>
+      
+             <div class="showPosts">
+            <ul class="ListOfPosts">
+                
+             <% for(post of posts){%>
+                <%-include("_post") %>
+                
+         <% } %>
+                    </ul>
+        </div>
+
+     
+          
+       
+        </section>
+       
+
+
+
+        <!-- Section for displaying functions -->
     <section id="friends">
         <h4> Friends </h4>
         <% for(u of all_users){%>
@@ -35,6 +48,12 @@
            
         <%}%>
     </section>
+
+     </div>
+   
+
+    
+
    
     
 </body>

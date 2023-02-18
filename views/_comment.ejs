@@ -1,14 +1,18 @@
-<li>
+<li id="comment-<%= comment._id %>">
     <p>
-       <%=comment.content%>
-         =>
-        <%=comment.user.name%>
-       <%if(locals.user && locals.user.id==comment.user.id ){%>
-           <small>
-               <a href="/comments/destroy/<%=comment._id%>">Delete</a>
-           </small>
-      <% }%>
-   </p> 
+        <%=comment.content%>
+        =>
+       <%=comment.user.name%>
+      <%if(locals.user && locals.user.id==comment.user.id ){%>
+          <small>
+              <a  class="delete-comment-button" href="/comments/destroy/<%=comment._id%>">Delete</a>
+          </small>
+     <% }%>
+
+    </p>
+   
+      
+   
 
    </li>
  
