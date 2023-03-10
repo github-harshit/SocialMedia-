@@ -8,53 +8,100 @@
     <title>Document</title>
 </head>
 <body>
-    <h1> Home Page </h1> 
+    
      <div class="container">
+        <div class="post">
+            <div class="postCenter">
+                <section id="postContainer">
+                   
+                        <%if(locals.user){%>
+                            <form action="/post/create" id="newPostForm" method="post">
+                             <div class="addPost">
+                                <textarea name="content" id="content" cols="25" rows="3" placeholder="What's on your mind,  <%=locals.user.name %>"></textarea>
+                                <input type="submit" class="submit" value="Post">
 
-        <section id="postContainer">
-            <h4>Posts</h4>
-            <%if(locals.user){%>
-                <form action="/post/create" id="newPostForm" method="post">
-                <textarea name="content" id="content" cols="30" rows="5"></textarea>
-                <input type="submit" placeholder="Submit">
-            </form>
-           <% } %>
-      
-             <div class="showPosts">
-            <ul class="ListOfPosts">
+                             </div>   
+                           
+                        </form>
+                       <% } %>
+
+                  
                 
-             <% for(post of posts){%>
-                <%-include("_post") %>
+                   
+              
+                     <div class="showPosts">
+                    <ul class="ListOfPosts">
+                        
+                     <% for(post of posts){%>
+                        
+                       <%-include("_post") %>
+                        
+                 <% } %>
+                            </ul>
+                </div>
+        
+             
+                  
+               
+                </section>
                 
-         <% } %>
-                    </ul>
+            </div>
+            
+
         </div>
 
-     
-          
        
+       
+    <div class="rightSideBar">
+        <!-- section for displaying all users -->
+        <section id="users">
+            <h4> Users </h4>
+            <% for(u of all_users){%>
+                <p> 
+                    <a href="/users/profile/<%=u._id%>"><%=u.name%></a>
+                </p>
+               
+            <%}%>
         </section>
+    <!-- section for displaying all the friends-->
+    <% if(locals.user){%>
+        <section id="friends">
+           
+             <h4> Friends </h4> 
+            <% for(x of list){%>
+             <%=x%>
+         
+         <%}%>
+         </section>
+
+     <%}%>
        
 
 
+    </div>
 
-        <!-- Section for displaying functions -->
-    <section id="friends">
-        <h4> Friends </h4>
-        <% for(u of all_users){%>
-            <p> 
-                <a href="/users/profile/<%=u._id%>"><%=u.name%></a>
-            </p>
-           
-        <%}%>
-    </section>
 
+    
+   
+       
+   <%-include("chat.ejs") -%>
      </div>
    
 
     
 
-   
     
+   <script src="/js/home_post.js"></script>
+    <script src="/js/home_comments.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+   <script src="/js/chat_engine.js"></script>
+   <% if(locals.user){ %>
+    <script> 
+  
+    new ChatEngine('user-chat-box', '<%=locals.user.email%>')
+    </script>
+
+   <% } %>
+  
 </body>
 </html>

@@ -2,12 +2,60 @@
     display: flex;
     
 }
- #postContainer{
+
+
+ 
+
+ .post{
     width: 70%;
      padding: 10px;
+     height: 100%;
+    border: 1px solid black;
      
  }
-  #friends{
+  .postCenter{
+    width: 60%;
+    height: 40%;
+    margin: 10px auto; 
+   
+  }
+  
+  #newPostForm{
+     width: 80%;
+     display: block;
+    margin: 10px auto;
+  
+  }
+
+  /* styling add new post section */
+  .addPost{
+    width: 100%;
+    display: flex; 
+
+  }
+
+  .addPost  textarea{
+    width:80%
+  }
+   
+  
+.addPost input{
+    width: 12%; 
+    
+
+     
+  }
+
+  /* Styling the structure of different posts */ 
+
+   .ListOfPosts{
+    list-style: none;
+   }
+   
+
+
+
+  .rightSideBar{
     width: 30%;
     
   }

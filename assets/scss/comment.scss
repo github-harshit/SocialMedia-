@@ -1,0 +1,21 @@
+.onlyComments{
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: rgb(240, 248, 255);
+
+}
+ .delete-comment-button{
+    padding: 10px;
+
+ }
+ .delete-comment-button:hover{
+    color: red;
+ }
+ .toggle-like-button-comment{
+    padding: 10px;
+    text-decoration: none;
+ }
+ .toggle-like-button-comment:hover{
+    color:  rgb(99, 99, 235);
+ }
+ 

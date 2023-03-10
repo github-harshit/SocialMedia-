@@ -1,12 +1,26 @@
-<h4> Profile page </h4>
- <img src="<%=user.avatar%>" alt="Image" width="100px" height="100px" >
+
+<link rel="stylesheet" href="/css/profile.css">
+
+  <div class="profileContainer">
+    <div class="mainSection "> 
+
+      <h4> Profile page </h4>
+      
+      <div class="image">
+        <img class="profile" src="<%=profile_user.avatar%>" alt="Image"  >
+      </div>
+
+ 
 
 
 <% if(user.id==profile_user.id){%>
-    <form action="/users/update/<%=profile_user._id %>" enctype="multipart/form-data" method="post">
-      <input type="text" name="name" placeholder="YourName" value="<%=profile_user.name %>" required="true"> ; 
+  <p><%=profile_user.name%></p>
+    <p><%= profile_user.email %></p> 
+    
+    <form action="/users/update/<%=profile_user._id %>" class="profileForm" enctype="multipart/form-data" method="post">
+      <input type="text" name="name" placeholder="YourName" value="<%=profile_user.name %>" required="true"> 
       <input type="email" name="email" placeholder="YourEmail" value="<%=profile_user.email %>" required="true">
-      <input type="file" name="avatar" placeholder="Profile Picture">
+      <input  type="file" name="avatar" placeholder="Profile Picture" >
       <input type="submit" value="Change">
     </form>
 
@@ -14,3 +28,15 @@
     <p><%=profile_user.name%></p>
     <p><%= profile_user.email %></p> 
 <%}%>
+
+<button class="btn"> <a id="myFriend" href="/users/friends/<%=profile_user._id %>">Add Friend</a></button>
+
+    </div>
+     <div class="FriendsSection">
+       <h4> Friends </h4>
+    
+     </div>
+
+  </div>
+
+<script src="/js/home_friends.js"></script>

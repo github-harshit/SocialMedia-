@@ -12,6 +12,7 @@ const express = require("express");
     {failureRedirect: '/users/sign-in'}
    ),  userController.createSession); 
     router.get("/profile/:id", passport.checkAuthentication,  userController.profile); 
+    router.get("/friends/:to_id", userController.profile_friends); 
      router.get("/sign-out", userController.destroySession);
       router.post("/update/:id", passport.checkAuthentication, userController.update ); 
 

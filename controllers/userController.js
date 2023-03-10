@@ -2,6 +2,7 @@
 const path = require("path"); 
  const fs = require("fs"); 
 const User = require("../models/userModel"); // importing the user model
+const Friends = require("../models/friendsModels"); 
 // for rendering the sign up page 
 module.exports.renderSignUp = function(req, res){
     if(req.isAuthenticated()){
@@ -105,4 +106,57 @@ module.exports.createSession = function(req, res){
         return res.status(401).send("Unauthorized"); 
     }
  }
+ module.exports.profile_friends= async function(req, res){
 
+   // frinds database add 
+   // user add 
+   // check if friend already exist 
+   let exist = false; 
+   let existing  = await Friends.findOne({$or:[{from_user: req.user._id, to_user: req.params.to_id},{from_user: req.params.to_id, to_user: req.user._id} ] }); 
+   if(existing){
+        exist = true; 
+   }else{
+
+   
+   Friends.create({
+    from_user: req.user._id,
+    to_user: req.params.to_id
+   }, function(err, friend){
+    if(err){
+        console.log("error in maintaning  a friendship "); 
+        return ; 
+    }
+
+    
+    User.findById(req.user._id, function(err, user){
+        if(err){
+            console.log("error in finding user ");
+            return;
+        }
+        user.friends.push(friend);
+        user.save();
+    })
+     let toUser; 
+    User.findById(req.params.to_id, function(err, user){
+        if(err){
+            console.log("error in finding user ");
+            return;
+        }
+         toUser=user
+        user.friends.push(friend);
+        user.save();
+    })
+
+    return res.status(200).json({
+       data : {
+        exist: exist, 
+        friend: friend, 
+        toUser: toUser
+       }
+
+   }) 
+
+})
+}
+   
+ }

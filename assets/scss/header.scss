@@ -2,7 +2,7 @@
 .headerContainer{
      height: 50px;
       width: 100%;
-      background-color: blue;
+      background-color: rgb(99, 99, 235);
        color: white ;
 
 
@@ -34,4 +34,12 @@
    color: white ;
     text-decoration: none;
    }
+    .profileLink{
+         position: absolute;
+         left: 85%
+    }
+    .home{
+        position: absolute;
+         left: 10%;
+    }
     

@@ -4,8 +4,14 @@
     <ul class="list">
       
         <% if(locals.user){ %>
+                    <li class="item homePage">
+                        <a href="/">Home  </a>
+                    </li>
                     <li class="item SignOut">
                         <a href="/users/sign-out">Sign Out </a>
+                    </li>
+                    <li class="item profileLink">
+                        <a href="/users/profile/<%=locals.user._id%>">Profile </a>
                     </li>
     
          <%} else{ %>
